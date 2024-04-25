@@ -1,7 +1,7 @@
 body{
     text-align: center;
     width: 100vh;
-    margin: 10px 350px;
+    margin: 100px 350px;
     font-family:Georgia, 'Times New Roman', Times, serif;
     background-color: whitesmoke;
 }
@@ -23,44 +23,42 @@ body{
 .container form{
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 13px;
     margin-bottom: 12px;
 }
 
 label {
     font-size: 25px;
-    letter-spacing: 10px;
+    letter-spacing: 5px;
     line-height: 1;
 }
 
 input {
-    width: 25vh;
-    height: 3vh;
+    width: 10vh;
+    height: 4vh;
     border: 2px solid #8e8a8a;
     border-radius: 10px;
     margin: auto;
-    font-size: 18px;
+    font-size: 20px;
     text-align: center;
 }
 
-.submitBtn{
+.goBtn{
     cursor: pointer;
     border-radius: 20px;
     height: auto;
     width: auto;
     padding: 5px 30px;
     font-size: 29px;
-    /* background: rgb(129, 126, 126); */
-    background: rgb(170, 168, 168);
+    background: rgb(129, 126, 126);
     color: rgb(239, 237, 237);
 }
 
 @media only screen and (max-width: 992px) {
     body {
         width: 50vh;
-        margin: 2px auto;
-        gap: 5px;
-        overflow-x: hidden;
+        margin: 91px auto;
+        overflow: hidden;
     }    
     .container h1 {
         font-size: 20px;
@@ -72,8 +70,8 @@ input {
 @media only screen and (min-width: 993px) and (max-width: 1366px) {
     body {
         width: 70vh;
-        margin: 20px auto;
-        overflow-x: hidden;
+        margin: 91px auto;
+        overflow: hidden;
     }    
     .container h1 {
         font-size: 23px;
