@@ -21,11 +21,12 @@ var fnameStat = false;
 var lnameStat = false;
 var ageStat = false;
 var emailsStat = false;
-var telStat = false;
+var telStat = true;
 var passCheck = true;
 
 function checkFName() {
     if (!fname.checkValidity()) {
+        fnameStat = false;
         fnameError.textContent = "First Name feild is required";
         if (!document.querySelector(".submitBtn").disabled) {
             document.querySelector(".submitBtn").style.backgroundColor = 'rgb(170, 168, 168)';
@@ -41,6 +42,7 @@ function checkFName() {
 
 function checkLName() {
     if (!lname.checkValidity()) {
+        lnameStat = false;
         lnameError.textContent = "Last Name feild is required";
         if (!document.querySelector(".submitBtn").disabled) {
             document.querySelector(".submitBtn").style.backgroundColor = 'rgb(170, 168, 168)';
@@ -55,6 +57,7 @@ function checkLName() {
 
 function checkAge() {
     if (!age.checkValidity()) {
+        ageStat = false;
         ageError.textContent = "Age Field is Required and Age should be 18 to 151";
         if (!document.querySelector(".submitBtn").disabled) {
             document.querySelector(".submitBtn").style.backgroundColor = 'rgb(170, 168, 168)';
@@ -70,6 +73,7 @@ function checkAge() {
 
 function checkEmails() {
     if (!emails.checkValidity()) {
+        emailsStat = false;
         emailsError.textContent = "Please follow the email syntax rule. (example@domain.com)";
         if (!document.querySelector(".submitBtn").disabled) {
             document.querySelector(".submitBtn").style.backgroundColor = 'rgb(170, 168, 168)';
@@ -84,7 +88,8 @@ function checkEmails() {
 }
 
 function checkTel() {
-    if (!telNo.checkValidity()) {
+    if (!telNo.checkValidity()) { 
+        telStat = false;
         telError.textContent = "Please follow the Pattern . (03** - *******) with 11 digits.";
         document.querySelector(".submitBtn").style.backgroundColor = 'rgb(170, 168, 168)';
         document.querySelector(".submitBtn").setAttribute("disabled", "disabled");
@@ -182,7 +187,7 @@ function checkPassword() {
 }
 
 function checkingCredentials() {
-    if (passCheck){
+    if (passCheck && fnameStat && lnameStat && ageStat && emailsStat && telStat){
         alert("Form Submitted");
     } else {
         alert("Please Validate all fields before submission");
