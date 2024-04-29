@@ -15,12 +15,16 @@
         <form>
             <label for="fname">First name</label>
             <input type="text" id="fname" maxlength="15" placeholder="Enter First Name" onblur="checkFName()" required>
+            <span id="fnameError" class="error"></span>
             <label for="lname">Last name</label>
             <input type="text" id="lname" maxlength="15" placeholder="Enter Last Name" onblur="checkLName()" required>
+            <span id="lnameError" class="error"></span>
             <label for="Age">Age</label>
             <input type="number" id="Age" min="18" max="151" placeholder="Enter Age" onblur="checkAge()" required style="width: 15vh;"/>
+            <span id="ageError" class="error"></span>
             <label for="emails">Notification emails</label>
             <input type="email" multiple id="emails" placeholder="Enter Your Emails" onblur="checkEmails()" required style="width: 45vh;" />
+            <span id="emailsError" class="error"></span>
             <label for="pass">Password</label>
             <input type="password" id="pass" onblur="checkPasswordField()" placeholder="Enter Password">
             <span id="passError" class="error"></span>

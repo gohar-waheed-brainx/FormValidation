@@ -11,6 +11,10 @@ var telNo = document.getElementById("telNo");
 var passError = document.getElementById('passError');
 var cpassError = document.getElementById('cpassError');
 var telError = document.getElementById('telError');
+var fnameError = document.getElementById('fnameError');
+var lnameError = document.getElementById('lnameError');
+var ageError = document.getElementById('ageError');
+var emailsError = document.getElementById('emailsError');
 
 // Variables for each validation status
 var fnameStat = false;
@@ -18,12 +22,18 @@ var lnameStat = false;
 var ageStat = false;
 var emailsStat = false;
 var telStat = false;
+var passCheck = true;
 
 function checkFName() {
     if (!fname.checkValidity()) {
-        fname.reportValidity();
-        return false;
+        fnameError.textContent = "First Name feild is required";
+        if (!document.querySelector(".submitBtn").disabled) {
+            document.querySelector(".submitBtn").style.backgroundColor = 'rgb(170, 168, 168)';
+            document.querySelector(".submitBtn").setAttribute("disabled", "disabled");
+        }
+        return;
     } else {
+        fnameError.textContent = "";
         fnameStat = true;
         checkPassword();
     }
@@ -31,9 +41,13 @@ function checkFName() {
 
 function checkLName() {
     if (!lname.checkValidity()) {
-        lname.reportValidity();
-        return;
+        lnameError.textContent = "Last Name feild is required";
+        if (!document.querySelector(".submitBtn").disabled) {
+            document.querySelector(".submitBtn").style.backgroundColor = 'rgb(170, 168, 168)';
+            document.querySelector(".submitBtn").setAttribute("disabled", "disabled");
+        }
     } else {
+        lnameError.textContent = "";
         lnameStat = true;
         checkPassword();
     }
@@ -41,9 +55,14 @@ function checkLName() {
 
 function checkAge() {
     if (!age.checkValidity()) {
-        age.reportValidity();
+        ageError.textContent = "Age Field is Required and Age should be 18 to 151";
+        if (!document.querySelector(".submitBtn").disabled) {
+            document.querySelector(".submitBtn").style.backgroundColor = 'rgb(170, 168, 168)';
+            document.querySelector(".submitBtn").setAttribute("disabled", "disabled");
+        }
         return;
     } else {
+        ageError.textContent = "";
         ageStat = true;
         checkPassword();
     }
@@ -51,9 +70,14 @@ function checkAge() {
 
 function checkEmails() {
     if (!emails.checkValidity()) {
-        emails.reportValidity();
+        emailsError.textContent = "Please follow the email syntax rule. (example@domain.com)";
+        if (!document.querySelector(".submitBtn").disabled) {
+            document.querySelector(".submitBtn").style.backgroundColor = 'rgb(170, 168, 168)';
+            document.querySelector(".submitBtn").setAttribute("disabled", "disabled");
+        }
         return;
     } else {
+        emailsError.textContent = "";
         emailsStat = true;
         checkPassword();
     }
@@ -66,6 +90,7 @@ function checkTel() {
         document.querySelector(".submitBtn").setAttribute("disabled", "disabled");
         return;
     } else {
+        telError.textContent = "";
         telStat = true;
         checkPassword();
     }
@@ -73,7 +98,26 @@ function checkTel() {
 
 function checkPasswordField() {
     if ((pass.value.trim() !== "") && (cpass.value.trim() !== "")) {
+        passCheck = false;
+        if (!document.querySelector(".submitBtn").disabled) {
+            document.querySelector(".submitBtn").style.backgroundColor = 'rgb(170, 168, 168)';
+            document.querySelector(".submitBtn").setAttribute("disabled", "disabled");
+        }
         checkPassword();
+    } else if ((pass.value.trim() !== "") && (cpass.value.trim() === "")) {
+        passCheck = false;
+        if (!document.querySelector(".submitBtn").disabled) {
+            document.querySelector(".submitBtn").style.backgroundColor = 'rgb(170, 168, 168)';
+            document.querySelector(".submitBtn").setAttribute("disabled", "disabled");
+        }
+        cpassError.textContent = "Please Fill Confirm Password";
+    } else if ((pass.value.trim() === "") && (cpass.value.trim() !== "")) {
+        passCheck = false;
+        if (!document.querySelector(".submitBtn").disabled) {
+            document.querySelector(".submitBtn").style.backgroundColor = 'rgb(170, 168, 168)';
+            document.querySelector(".submitBtn").setAttribute("disabled", "disabled");
+        }
+        passError.textContent = "Please Fill Password Field";
     }
 }
 
@@ -90,6 +134,7 @@ function checkPassword() {
 
         if (passwordValid && passwordsMatch) {
             if (document.querySelector(".submitBtn").disabled) {
+                passCheck = true;
                 // Password is valid, enable submit button
                 passError.textContent = "";
                 cpassError.textContent = "";
@@ -98,10 +143,12 @@ function checkPassword() {
             }
         } else {
             if (!passwordValid){
+                passCheck = false;
                 // Password is invalid, disable submit button
                 passError.textContent = "Password should have min length of 8. Should have both alphanumeric, should have at least one upper case and one the lower case.";
                 cpassError.textContent = "Password should have min length of 8. Should have both alphanumeric, should have at least one upper case and one the lower case.";
             } else if (!passwordsMatch) {
+                passCheck = false;
                 passError.textContent = "Password Mis-Matched";
                 cpassError.textContent = "Password Mis-Matched";
             }
@@ -109,12 +156,14 @@ function checkPassword() {
             document.querySelector(".submitBtn").setAttribute("disabled", "disabled");
         }
     } else if ((fnameStat) && (lnameStat) && (ageStat) && (emailsStat) && (pass.value.trim() === "") && (cpass.value.trim() !== "")) {
+        passCheck = false;
         // Password is invalid, disable submit button
         passError.textContent = "Please enter a password";
         cpassError.textContent = "Please enter a password";
         document.querySelector(".submitBtn").style.backgroundColor = 'rgb(170, 168, 168)';
         document.querySelector(".submitBtn").setAttribute("disabled", "disabled");
     } else if ((fnameStat) && (lnameStat) && (ageStat) && (emailsStat) && (pass.value.trim() !== "") && (cpass.value.trim() === "")) {
+        passCheck = false;
         // Password is invalid, disable submit button
         passError.textContent = "Please confirm your password";
         cpassError.textContent = "Please confirm your password";
@@ -122,6 +171,7 @@ function checkPassword() {
         document.querySelector(".submitBtn").setAttribute("disabled", "disabled");
     } else if ((fnameStat) && (lnameStat) && (ageStat) && (emailsStat) && (pass.value.trim() === "") && (cpass.value.trim() === "")) {
         if (document.querySelector(".submitBtn").disabled) {
+            passCheck = true;
             // Password is valid, enable submit button
             passError.textContent = "";
             cpassError.textContent = "";
@@ -132,5 +182,11 @@ function checkPassword() {
 }
 
 function checkingCredentials() {
-    alert("Form Submitted");
+    if (passCheck){
+        alert("Form Submitted");
+    } else {
+        alert("Please Validate all fields before submission");
+        document.querySelector(".submitBtn").style.backgroundColor = 'rgb(170, 168, 168)';
+        document.querySelector(".submitBtn").setAttribute("disabled", "disabled");
+    }
 }
